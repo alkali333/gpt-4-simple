@@ -16,11 +16,3 @@ def get_answer(question: str) -> str:
 
     # Extract the 'output' value
     return return_values["output"]
-
-
-def parse_response(response: str) -> str:
-    pattern = r"Text\(annotations=\[\], value='(.*?)'\), type='text'"
-
-    values = re.findall(pattern, response, re.DOTALL)
-
-    return values[0]
