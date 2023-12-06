@@ -5,14 +5,22 @@ import re
 load_dotenv()
 
 
-def get_answer(question: str) -> str:
+def get_answer(question: str, thread_id: str = "") -> str:
+    """This function sends a question to the OpenAI assistant. If a thread ID is specified
+    it will continue the thread, otherwise it will start a new thread. In either case it
+    will return the answer and the thread id."""
+
     assistant = OpenAIAssistantRunnable(
         assistant_id="asst_8HFshA1tzFfosxA6G7kzqpCt", as_agent=True
     )
 
-    response = assistant.invoke({"content": question})
-    # Access the 'return_values' dictionary
+    config_dict = {"content": question}
+
+    if thread_id:
+        config_dict["thread_id"] = thread_id
+
+    response = assistant.invoke(config_dict)
+
     return_values = response.return_values
 
-    # Extract the 'output' value
-    return return_values["output"]
+    return return_values["output"], return_values["thread_id"]
