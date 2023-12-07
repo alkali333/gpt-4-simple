@@ -1,13 +1,13 @@
-from functions import get_answer
+from functions import get_answer, reset_chat
+from streamlit_chat import message
 import streamlit as st
-
-
-def reset_chat():
-    st.session_state.thread_id = None
 
 
 if "thread_id" not in st.session_state:
     st.session_state.thread_id = None
+
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
 with st.form("ask"):
     question = st.text_area("Ask your question")
@@ -23,4 +23,11 @@ if question and submitted:
         else:
             answer, _ = get_answer(question, st.session_state.thread_id)
 
-        st.write(answer)
+    st.session_state.messages.append(question)
+    st.session_state.messages.append(answer)
+    # st.write(answer)
+
+    for i, m in enumerate(st.session_state.messages):
+        message(m, is_user=i % 2 == 0, key=i)
+
+    st.button("Clear Chat", on_click=reset_chat)

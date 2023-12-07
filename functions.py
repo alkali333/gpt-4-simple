@@ -1,8 +1,14 @@
 from dotenv import load_dotenv
+import streamlit as st
 from langchain.agents.openai_assistant import OpenAIAssistantRunnable
 import re
 
 load_dotenv()
+
+
+def reset_chat():
+    st.session_state.thread_id = None
+    st.session_state.messages = []
 
 
 def get_answer(question: str, thread_id: str = "") -> str:
