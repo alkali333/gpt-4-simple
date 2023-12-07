@@ -25,7 +25,7 @@ st.write(
          or draft a letter / email. It has been trained to use the Mental Health Act and Code Of Practice. """
 )
 
-with st.form("ask"):
+with st.form("ask", clear_on_submit=True):
     question = st.text_area("Ask your question")
 
     options = [
