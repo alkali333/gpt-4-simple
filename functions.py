@@ -1,9 +1,18 @@
+import os
 from dotenv import load_dotenv
 import streamlit as st
 from langchain.agents.openai_assistant import OpenAIAssistantRunnable
 import re
 
 load_dotenv()
+
+if "OPENAI_API_KEY" not in os.environ:
+    if "OPENAI_API_KEY" in st.secrets:
+        os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+    else:
+        raise EnvironmentError(
+            "Open AI key not found in environment variables or Streamlit secrets."
+        )
 
 
 def reset_chat():
