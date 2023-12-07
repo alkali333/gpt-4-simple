@@ -3,7 +3,7 @@ from streamlit_chat import message
 import streamlit as st
 
 st.set_page_config(
-    page_title="IMHA Information ChatBot from Alkali Media",
+    page_title="Mental Health Advocate Advisor ChatBot from Alkali Media",
     page_icon="📢",
     layout="centered",
     initial_sidebar_state="auto",
@@ -17,8 +17,13 @@ if "thread_id" not in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-st.header("📢 IMHA Information ChatBot")
+st.header("📢 Mental Health Advocate Advisor ChatBot")
 
+st.write(
+    """This chatbot provides informations for IMHAs and Community Mental Health Advocates. 
+         You can ask about a specific case, request information about mental health legislation, 
+         or draft a letter / email. It has been trained to use the Mental Health Act and Code Of Practice. """
+)
 
 with st.form("ask"):
     question = st.text_area("Ask your question")
@@ -72,7 +77,7 @@ st.write("\n\n\n")
 st.write("-" * 888)
 st.info(
     body="""
-    Disclaimer:
+    Disclaimer And Privacy Information:
 
     Please note that this ChatBot is designed to support Independent Mental Health Advocates by providing information based on the Mental Health Act and the Code of Practice. However, it is not a substitute for professional legal advice. While every effort has been made to ensure the accuracy of the information provided, the ChatBot relies on algorithms that may not capture the nuances of individual cases. Therefore, users are advised to verify any legal references or information provided by the ChatBot before taking action.
 
